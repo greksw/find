@@ -8,10 +8,10 @@ OUTPUT_FILE="file_list.txt"  # Файл для записи результата
 # Очищаем файл вывода
 > "$OUTPUT_FILE"
 
-# Поиск файлов с "КП" или "кп" в названии и запись их в файл вывода
-find /path/to/search -type f \( -iname "*.doc" -o -iname "*.docx" -o -iname "*.xls" -o -iname "*.xlsx" \) \
+# Поиск файлов с "КП" или "кп" в названии, в нужном диапазоне дат и запись их в файл вывода
+find /home/runer/qnap/han -type f \( -iname "*.doc" -o -iname "*.docx" -o -iname "*.xls" -o -iname "*.xlsx" \) \
     -newermt "$START_DATE" ! -newermt "$END_DATE" \
-    -iname "*КП*" -o -iname "*кп*" -print > "$OUTPUT_FILE"
+    \( -iname "*КП*" -o -iname "*кп*" \) -print > "$OUTPUT_FILE"
 
 # Подсчет количества файлов каждого типа
 DOC_COUNT=$(grep -i ".doc$" "$OUTPUT_FILE" | wc -l)
